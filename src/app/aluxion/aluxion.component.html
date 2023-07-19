@@ -1,0 +1,108 @@
+<div class="contenedor">
+    <div 
+    [ngClass]="{'activo' : isActive}"
+    class="menu">
+        <div class="izquierda__menu">
+            <div class="main__menu">
+                <div 
+                *ngFor="let seccion of menu; let i = index"
+                (mouseover)="cambiarActiveSection(i)"
+                (mouseout)="quitarActiveSection()"
+                class="seccion__menu">
+                    <h3 class="titulo__seccion">{{seccion.seccion}}</h3>
+                    <div 
+                    [ngClass]="{'activo' : activeSection && posicion === i}"
+                    class="categoria__menu">
+                        <h5 
+                        *ngFor="let categoria of seccion.categoria; let i = index"
+                        (mouseover)="cambiarPosicionCategoria(i)"
+                        (mouseout)="quitarPosicionCategoria()"
+                        class="titulo__categoria">{{categoria}}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="foot__menu">
+                <a 
+                *ngFor="let cosas of footer"
+                [href]="cosas.enlace"
+                class="span__foot"
+                >{{cosas.titulo}}</a>
+            </div>
+        </div>
+        <div class="derecha__menu">
+            <div class="slider__menu">
+                <div 
+                *ngFor="let imagen of menu; let i = index"
+                [ngClass]="{'activo' : posicion === i}"
+                class="imagen__menu"
+                [ngStyle]="{'transform' : movimiento()}">
+                    <img 
+                    *ngFor="let foto of imagen.imagenes; let i = index"
+                    [ngClass]="{'activo' : posicionCategoria === i}"
+                    src="{{foto}}" alt="" class="img__menu">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contenido">
+        <nav class="nav">
+            <span 
+            [ngClass]="{'activo' : isActive }"
+            class="logo">mater</span>
+            <div 
+            (click)="cambiarActive()"
+            class="hamburguesa">
+            <div 
+            [ngClass]="{'activo' : isActive }"
+            class="ham__dentro">
+                    <div class="up"></div>
+                    <div class="mid"></div>
+                    <div class="bot"></div>
+                </div>
+            </div>
+        </nav>
+        <div class="main">
+            <div class="main__left">
+                <div class="product__info">
+                    <div class="info__contenedor">
+                        <div 
+                        *ngFor="let informacion of producto; let i = index"
+                        [ngStyle]="{'transform' : cambiarTranslateY()}"
+                        [ngClass]="{'activo' : translateY === i}"
+                        class="producto">
+                            <h3 class="h3__titulo">{{informacion.nombre}}</h3>
+                            <h2 class="info__titulo">{{informacion.titulo}}</h2>
+                            <h3 class="h3__titulo">{{informacion.descripcion}}</h3>
+                        </div>
+                    </div>
+                    <div 
+                    *ngFor="let informacion of producto; let i = index" 
+                    [ngClass]="{'activo' : translateY === i}"
+                    class="details__btn">
+                        <a [href]="informacion.enlace" class="product__details">Product Details</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="main__right">
+                <div 
+                *ngFor="let informacion of producto; let i = index"
+                [ngStyle]="{'transform' : cambiarTranslateY()}"
+                [ngClass]="{'activo' : translateY === i}"
+                class="product__img">
+                    <img [src]="informacion.imagen" alt="" class="img__img">
+                </div>
+            </div>
+        </div>
+        <div class="selections">
+            <div
+            *ngFor="let seccion of producto; let i = index" class="selection"
+            [ngClass]="{'activo' : translateY === i}"
+            (click)="cambiarValor(i)"
+            >
+                <h5 class="product__code">0{{seccion.codigo}}</h5>
+                <h4 class="product__title">{{seccion.titulo}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
